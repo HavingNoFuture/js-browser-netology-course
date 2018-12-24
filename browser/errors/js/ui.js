@@ -1,12 +1,6 @@
 'use strict';
-function handleClick(button) {
-  button.onclick = function() {
-    openMail();
-  };
-  button.onclick = function() {
-    openMail();
-  };
+function handleClick() {
+  openMail();
 }
-
 const button = document.getElementById('open');
-handleClick(button);
+button.onclick = handleClick;
