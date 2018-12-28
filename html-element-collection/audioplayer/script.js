@@ -8,33 +8,34 @@ const musicDB = {
 const playList = Object.keys(musicDB);
 let index = 0;
 
-
+const mediaPlayer = document.getElementsByClassName('mediaplayer')[0];
 const music = document.getElementsByTagName('audio')[0];
 
 const playBtn = document.getElementsByClassName('playstate')[0];
-const stop = playBtn.getElementsByClassName('fa-pause')[0];
-// stop.classList.add('fa-pause')
-// stop.elem.setAttribute("display", "block")
-
-
 const stopBtn = document.getElementsByClassName('stop')[0];
-
 const nextBtn = document.getElementsByClassName('next')[0];
-
 const backBtn = document.getElementsByClassName('back')[0];
 
 let playing = false;
-playBtn.onclick = () => {
-	playing = !playing;
+
+function playMusic() {
 	if (playing) {
 		music.play();
-		
+		mediaPlayer.classList.add('play');
 	} else {
 		music.pause();
+		mediaPlayer.classList.remove('play');
 	}
 }
 
+playBtn.onclick = () => {
+	playing = !playing;
+	playMusic();
+}
+
 stopBtn.onclick = () => {
+	playing = !playing;
+	mediaPlayer.classList.remove('play');
 	music.pause();
 	music.currentTime = 0;
 }
@@ -44,7 +45,7 @@ function initMusic() {
 	const title = document.getElementsByClassName('title')[0];
 	title.title = playList[index];
 	music.src = musicDB[playList[index]];
-	music.play();
+	playMusic();
 }
 
 nextBtn.onclick = () => {
