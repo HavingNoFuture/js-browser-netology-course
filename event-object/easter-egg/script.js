@@ -13,38 +13,22 @@ function showSecretMenu(event) {
 
 document.addEventListener('keydown', showSecretMenu);
 
+const secretWord = "01234356";
 let temp = "";
+
+const secretKeys = ['KeyY', 'KeyT', 'KeyN', 'KeyJ', 'KeyK', 'KeyU', 'KeyB', 'KeyZ'];
+
 function showSecretContent(event) {
-  switch (event.code) {
-    case 'KeyY':
-      temp += 'н';
-    break;
-    case 'KeyT':
-      temp += 'е';
-    break;
-    case 'KeyN':
-      temp += 'т';
-    break;
-    case 'KeyJ':
-      temp += 'о';
-    break;
-    case 'KeyK':
-      temp += 'л';
-    break;
-    case 'KeyU':
-      temp += 'г';
-    break;
-    case 'KeyB':
-      temp += 'и';
-    break;
-    case 'KeyZ':
-      temp += 'я';
-    break;  
+  console.log(event.key, temp)
+  let index = secretKeys.indexOf(event.code);
+  if (index != -1) {
+    temp += index;
   }
-  if (temp.indexOf('нетология') >= 0) {
-      const secretContent = document.getElementsByClassName('secret')[0];
-      secretContent.classList.add('visible');
-    }
+
+  if (temp.indexOf(secretWord) >= 0) {
+    const secretContent = document.getElementsByClassName('secret')[0];
+    secretContent.classList.add('visible');
+  } 
 }
 
 document.addEventListener('keydown', showSecretContent);
