@@ -30,6 +30,7 @@ for (let input of inputList) {
 btnSendMsg.addEventListener('click', onClick);
 btnEditMsg.addEventListener('click', onClick);
 function onClick() {
+	event.preventDefault();
 	contentForm.classList.toggle('hidden');
 	outputForm.classList.toggle('hidden');
 }
