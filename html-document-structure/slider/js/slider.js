@@ -1,40 +1,36 @@
 "use strict"
-const slides = document.querySelectorAll('.slide');
+const slides = document.querySelector('.slides');
 const prevSlide = document.querySelector('.slider-nav').firstElementChild;
 const lastSlide = document.querySelector('.slider-nav').lastElementChild;
 const nextSlide = prevSlide.nextElementSibling;
 const firstSlide = lastSlide.previousElementSibling;
+
+console.log(slides.firstElementChild)
 
 let currentSlide = document.querySelector('.slide-current');
 
 updateStatusBtns();
 function updateStatusBtns() {
 	currentSlide = document.querySelector('.slide-current');
-	firstSlide.classList.toggle('disabled', currentSlide === slides[0]);
-	prevSlide.classList.toggle('disabled', currentSlide === slides[0]);
-	lastSlide.classList.toggle('disabled', currentSlide === slides[slides.length - 1]);
-	nextSlide.classList.toggle('disabled', currentSlide === slides[slides.length - 1]);
+	firstSlide.classList.toggle('disabled', currentSlide === slides.firstElementChild);
+	prevSlide.classList.toggle('disabled', currentSlide === slides.firstElementChild);
+	lastSlide.classList.toggle('disabled', currentSlide === slides.lastElementChild);
+	nextSlide.classList.toggle('disabled', currentSlide === slides.lastElementChild);
 }
 
 function onClick(e) {
 	currentSlide = document.querySelector('.slide-current');
+	currentSlide.classList.remove('slide-current');
 	if (e.target.dataset.action === 'first') {
-		currentSlide.classList.remove('slide-current');
-		slides[0].classList.add('slide-current');
+		currentSlide = slides.firstElementChild;
 	} else if (e.target.dataset.action === 'last') {
-		currentSlide.classList.remove('slide-current');
-		slides[slides.length - 1].classList.add('slide-current');
-	} else if (e.target.dataset.action === 'next') {
-		if (currentSlide != slides[slides.length - 1]) {
-			currentSlide.classList.remove('slide-current');
-			currentSlide.nextElementSibling.classList.add('slide-current')
-		}
-	} else if (e.target.dataset.action === 'prev') {
-		if (currentSlide != slides[0]) {
-			currentSlide.classList.remove('slide-current');
-			currentSlide.previousElementSibling.classList.add('slide-current')
-		}
+		currentSlide = slides.lastElementChild;
+	} else if ((e.target.dataset.action === 'next') && (currentSlide != slides.lastElementChild)) {
+		currentSlide = currentSlide.nextElementSibling;
+	} else if ((e.target.dataset.action === 'prev') && (currentSlide != slides.firstElementChild)) {
+		currentSlide = currentSlide.previousElementSibling;
 	}
+	currentSlide.classList.add('slide-current');
 	updateStatusBtns();
 }
 
