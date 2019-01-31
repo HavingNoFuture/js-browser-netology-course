@@ -18,18 +18,26 @@ for (let article of articles) {
 }
 
 for (let tab of tabs) {
+	console.log(tab)
 	tab.addEventListener('click', onClick);
 	function onClick(event) {
-		let currentTab = document.querySelector('.ui-tabs-active');
+		const currentTab = document.querySelector('.ui-tabs-active');
 		currentTab.classList.remove('ui-tabs-active');
-		event.target.classList.add('ui-tabs-active');
+		event.currentTarget.classList.add('ui-tabs-active');
+
+		// for (let article of articles) {
+		// 	if (article.dataset.tabTitle == event.target.dataset.tabTitle) {
+		// 		article.classList.remove('hidden');
+		// 	} else {
+		// 		article.classList.add('hidden');
+		// 	}
+		// }
 
 		for (let article of articles) {
-			if (article.dataset.tabTitle == event.target.dataset.tabTitle) {
-				article.classList.remove('hidden');
-			} else {
-				article.classList.add('hidden');
-			}
+			article.classList.add('hidden');
 		}
+
+		const currentArticle = document.querySelector(`.tabs-content [data-tab-title=${event.target.dataset.tabTitle}]`);
+		currentArticle.classList.remove('hidden');
 	}
 }
